@@ -29,7 +29,9 @@ function omz_termsupport_preexec {
   emulate -L zsh
   setopt extended_glob
   local CMD=${1[(wr)^(*=*|sudo|ssh|rake|-*)]} #cmd name only, or if this is sudo or ssh, the next cmd
-  title "$CMD" "%n@%m: %100>...>${2:gs/%/%%}%<<"
+  local LINE="${2:gs/$/\\$}"
+  LINE="${LINE:gs/%/%%}"
+  title "$CMD" "%n@%m: %100>...>$LINE%<<"
 }
 
 autoload -U add-zsh-hook
